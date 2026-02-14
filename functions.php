@@ -138,7 +138,10 @@ add_action( 'widgets_init', 'action_labs_theme_widgets_init' );
  * Enqueue scripts and styles.
  */
 function action_labs_theme_scripts() {
-	wp_enqueue_style( 'action-labs-theme-style', get_stylesheet_uri(), array(), _S_VERSION );
+	// Enqueue Google Font: Roboto
+	wp_enqueue_style( 'action-labs-roboto', 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap', array(), null );
+
+	wp_enqueue_style( 'action-labs-theme-style', get_stylesheet_uri(), array( 'action-labs-roboto' ), _S_VERSION );
 	wp_style_add_data( 'action-labs-theme-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'action-labs-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );

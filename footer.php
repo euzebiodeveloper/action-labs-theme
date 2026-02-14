@@ -12,19 +12,15 @@
 ?>
 
 	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'action-labs-theme' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'action-labs-theme' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'action-labs-theme' ), 'action-labs-theme', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
+		<div class="footer-inner site-branding">
+			<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
+		</div>
+
+		<hr class="footer-sep">
+
+		<div class="footer-bottom">
+			<p><?php echo '© ' . date('Y') . '. Todos os direitos reservados.'; ?></p>
+		</div>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 

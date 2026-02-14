@@ -13,45 +13,64 @@
  */
 
 get_header();
+
+// Top container on the homepage with background image
+if (is_front_page() || is_home()) :
+  ?>
+    <section class="home-hero" aria-label="Portal do cliente">
+        <div class="home-hero-inner">
+            <h1 class="home-hero-title">Portal do cliente</h1>
+        </div>
+    </section>
+    <?php
+endif;
 ?>
 
-	<main id="primary" class="site-main">
+  <main id="primary" class="site-main">
 
-		<?php
-		if ( have_posts() ) :
+    <?php if (have_posts()) : ?>
 
-			if ( is_home() && ! is_front_page() ) :
-				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-				<?php
-			endif;
+      <div class="home-posts-wrap">
+        <div class="home-posts-grid">
+          <?php while (have_posts()) : the_post(); ?>
+            <article id="post-<?php the_ID(); ?>" <?php post_class('home-post-card'); ?> >
+              <a class="card-thumb" href="<?php the_permalink(); ?>">
+                <?php
+                if (has_post_thumbnail()) {
+                  the_post_thumbnail('medium_large', ['class' => 'card-thumb-img']);
+                } else {
+                  echo '<img class="card-thumb-img" src="' . esc_url(get_template_directory_uri() . '/assets/images/placeholder.jpg') . '" alt="' . esc_attr(get_the_title()) . '">';
+                }
+            $tags = get_the_tags();
+            if ($tags) {
+              $first_tag = $tags[0]->name;
+            } else {
+              $cats = get_the_category();
+              $first_tag = $cats ? $cats[0]->name : '';
+            }
+            if ($first_tag) {
+              echo '<span class="card-tag">' . esc_html($first_tag) . '</span>';
+            }
+            ?>
+              </a>
+              <div class="card-body">
+                <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                <p class="card-excerpt"><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
+                <a class="card-read-more" href="<?php the_permalink(); ?>">LEIA MAIS &nbsp;&raquo;</a>
+              </div>
+            </article>
+          <?php endwhile; ?>
+        </div>
+      </div>
 
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+      <?php the_posts_navigation(); ?>
 
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
+    <?php else : ?>
 
-			endwhile;
+      <p class="no-posts">Nenhum post encontrado.</p>
 
-			the_posts_navigation();
+    <?php endif; ?>
 
-		else :
+  </main><!-- #main -->
 
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
-
-<?php
-get_sidebar();
-get_footer();
+<?php get_footer();
