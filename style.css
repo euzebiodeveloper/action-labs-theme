@@ -222,6 +222,7 @@ textarea { width: 100%; }
 .sticky { display: block; }
 .post { width: 100%; padding-left: 120px; padding-right: 120px; margin: 0 0 1.5em; }
 .page { margin: 0 0 1.5em; }
+.error-404 { display: flex; width: 100%; align-items: center; justify-content: center; }
 .updated:not(.published) { display: none; }
 .page-content, .entry-content, .entry-summary { margin: 1.5em 0 0; }
 .page-links { clear: both; margin: 0 0 1.5em; }
