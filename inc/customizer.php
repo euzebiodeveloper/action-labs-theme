@@ -15,6 +15,37 @@ function action_labs_theme_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
+	// Remove the blog description control (site tagline) from the Customizer.
+	$wp_customize->remove_control( 'blogdescription' );
+
+	/* Home action title setting */
+	$wp_customize->add_setting( 'home_action_title', array(
+		'default'           => 'Portal do cliente',
+		'transport'         => 'postMessage',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+
+	$wp_customize->add_control( 'home_action_title', array(
+		'label'    => __( 'Home action title', 'action-labs-theme' ),
+		'section'  => 'title_tagline',
+		'settings' => 'home_action_title',
+		'type'     => 'text',
+	) );
+
+	/* Home action about us setting */
+	$wp_customize->add_setting( 'home_action_about_us', array(
+		'default'           => 'SOBRE NÓS',
+		'transport'         => 'postMessage',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+
+	$wp_customize->add_control( 'home_action_about_us', array(
+		'label'    => __( 'Home action about us', 'action-labs-theme' ),
+		'section'  => 'title_tagline',
+		'settings' => 'home_action_about_us',
+		'type'     => 'text',
+	) );
+
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(
 			'blogname',
@@ -23,11 +54,23 @@ function action_labs_theme_customize_register( $wp_customize ) {
 				'render_callback' => 'action_labs_theme_customize_partial_blogname',
 			)
 		);
+
+
+		/* selective refresh for home action title */
 		$wp_customize->selective_refresh->add_partial(
-			'blogdescription',
+			'home_action_title',
 			array(
-				'selector'        => '.site-description',
-				'render_callback' => 'action_labs_theme_customize_partial_blogdescription',
+				'selector'        => '.home-action-title',
+				'render_callback' => 'action_labs_theme_customize_partial_home_action_title',
+			)
+		);
+
+		/* selective refresh for home action about us */
+		$wp_customize->selective_refresh->add_partial(
+			'home_action_about_us',
+			array(
+				'selector'        => '.header-cta',
+				'render_callback' => 'action_labs_theme_customize_partial_home_action_about_us',
 			)
 		);
 	}
@@ -48,8 +91,24 @@ function action_labs_theme_customize_partial_blogname() {
  *
  * @return void
  */
-function action_labs_theme_customize_partial_blogdescription() {
-	bloginfo( 'description' );
+// site tagline partial removed (description control hidden)
+
+/**
+ * Render the home action title for the selective refresh partial.
+ *
+ * @return void
+ */
+function action_labs_theme_customize_partial_home_action_title() {
+	echo esc_html( get_theme_mod( 'home_action_title', 'Portal do cliente' ) );
+}
+
+/**
+ * Render the home action about us for the selective refresh partial.
+ *
+ * @return void
+ */
+function action_labs_theme_customize_partial_home_action_about_us() {
+	echo esc_html( get_theme_mod( 'home_action_about_us', 'SOBRE NÓS' ) );
 }
 
 /**

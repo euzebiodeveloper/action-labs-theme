@@ -20,6 +20,20 @@
 		} );
 	} );
 
+	// Home action title live preview
+	wp.customize( 'home_action_title', function( value ) {
+		value.bind( function( to ) {
+			$( '.home-action-title' ).text( to );
+		} );
+	} );
+
+	// Home action about us live preview
+	wp.customize( 'home_action_about_us', function( value ) {
+		value.bind( function( to ) {
+			$( '.header-cta' ).text( to );
+		} );
+	} );
+
 	// Header text color.
 	wp.customize( 'header_textcolor', function( value ) {
 		value.bind( function( to ) {

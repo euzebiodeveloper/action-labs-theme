@@ -17,9 +17,9 @@ get_header();
 // Top container on the homepage with background image
 if (is_front_page() || is_home()) :
   ?>
-    <section class="home-hero" aria-label="Portal do cliente">
-        <div class="home-hero-inner">
-            <h1 class="home-hero-title">Portal do cliente</h1>
+    <section class="home-action" aria-label="Portal do cliente">
+        <div class="home-action-inner">
+            <h1 class="home-action-title"><?php echo esc_html( get_theme_mod( 'home_action_title', 'Portal do cliente' ) ); ?></h1>
         </div>
     </section>
     <?php
