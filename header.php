@@ -27,21 +27,31 @@
 
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
-			<?php
-				the_custom_logo();
-				if ( is_front_page() && is_home() ) :
-			?>
-					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php
-				else :
-			?>
-					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-				endif;
-			?>
+			<?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+				<?php the_custom_logo(); ?>
+			<?php else : ?>
+				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+			<?php endif; ?>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">
-			<a class="header-cta" href="<?php echo esc_url( home_url( '/sobre-nos/' ) ); ?>"><?php echo esc_html( get_theme_mod( 'home_action_about_us', 'SOBRE NÓS' ) ); ?></a>
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle menu', 'action-labs-theme' ); ?>">
+				<span class="menu-icon" aria-hidden="true">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</button>
+
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'menu-1',
+					'menu_id'        => 'primary-menu',
+				)
+			);
+			?>
+
+            
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->

@@ -13,7 +13,11 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="footer-inner site-branding">
-			<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
+			<?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+				<?php the_custom_logo(); ?>
+			<?php else : ?>
+				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+			<?php endif; ?>
 		</div>
 
 		<hr class="footer-sep">

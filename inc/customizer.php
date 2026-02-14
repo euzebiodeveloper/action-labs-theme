@@ -32,19 +32,6 @@ function action_labs_theme_customize_register( $wp_customize ) {
 		'type'     => 'text',
 	) );
 
-	/* Home action about us setting */
-	$wp_customize->add_setting( 'home_action_about_us', array(
-		'default'           => 'SOBRE NÓS',
-		'transport'         => 'postMessage',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-
-	$wp_customize->add_control( 'home_action_about_us', array(
-		'label'    => __( 'Home action about us', 'action-labs-theme' ),
-		'section'  => 'title_tagline',
-		'settings' => 'home_action_about_us',
-		'type'     => 'text',
-	) );
 
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(
@@ -65,14 +52,7 @@ function action_labs_theme_customize_register( $wp_customize ) {
 			)
 		);
 
-		/* selective refresh for home action about us */
-		$wp_customize->selective_refresh->add_partial(
-			'home_action_about_us',
-			array(
-				'selector'        => '.header-cta',
-				'render_callback' => 'action_labs_theme_customize_partial_home_action_about_us',
-			)
-		);
+
 	}
 }
 add_action( 'customize_register', 'action_labs_theme_customize_register' );
@@ -102,14 +82,7 @@ function action_labs_theme_customize_partial_home_action_title() {
 	echo esc_html( get_theme_mod( 'home_action_title', 'Portal do cliente' ) );
 }
 
-/**
- * Render the home action about us for the selective refresh partial.
- *
- * @return void
- */
-function action_labs_theme_customize_partial_home_action_about_us() {
-	echo esc_html( get_theme_mod( 'home_action_about_us', 'SOBRE NÓS' ) );
-}
+
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
