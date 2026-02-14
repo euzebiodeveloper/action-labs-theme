@@ -47,7 +47,7 @@ jobs:
         with:
           artifacts: "dist/${{ env.THEME_NAME }}.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit: "release"
+          commit: ${{ github.sha }}
           draft: true
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
