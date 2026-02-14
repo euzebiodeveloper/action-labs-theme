@@ -36,22 +36,20 @@ endif;
             <article id="post-<?php the_ID(); ?>" <?php post_class('home-post-card'); ?> >
               <a class="card-thumb" href="<?php the_permalink(); ?>">
                 <?php
-                if (has_post_thumbnail()) {
-                  the_post_thumbnail('medium_large', ['class' => 'card-thumb-img']);
-                } else {
-                  echo '<img class="card-thumb-img" src="' . esc_url(get_template_directory_uri() . '/assets/images/placeholder.jpg') . '" alt="' . esc_attr(get_the_title()) . '">';
-                }
-            $tags = get_the_tags();
-            if ($tags) {
-              $first_tag = $tags[0]->name;
-            } else {
-              $cats = get_the_category();
-              $first_tag = $cats ? $cats[0]->name : '';
-            }
-            if ($first_tag) {
-              echo '<span class="card-tag">' . esc_html($first_tag) . '</span>';
-            }
-            ?>
+									if (has_post_thumbnail()) {
+										the_post_thumbnail('medium_large', ['class' => 'card-thumb-img']);
+									} else {
+										echo '<img class="card-thumb-img" src="' . esc_url(get_template_directory_uri() . '/assets/images/placeholder.jpg') . '" alt="' . esc_attr(get_the_title()) . '">';
+									}
+									$cats = get_the_category();
+									$first_tag = '';
+									if(!empty($cats)) {
+										$first_tag = $cats ? $cats[0]->name : '';
+									}
+									if ($first_tag) {
+										echo '<span class="card-tag">' . esc_html($first_tag) . '</span>';
+									}
+								?>
               </a>
               <div class="card-body">
                 <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>

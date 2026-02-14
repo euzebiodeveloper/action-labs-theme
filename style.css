@@ -730,15 +730,6 @@ h5 {
 	}
 }
 
-/* Homepage background image (starts at top of body) */
-body.home,
-body.front-page {
-	background-image: url('assets/background/background-imagem-home.webp');
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
 /* Homepage action container (body top) */
 
 .home-action {
@@ -772,6 +763,31 @@ body.front-page {
 	z-index: 1;
 }
 
+.home-action-inner-single {
+	width: 100%;
+	height: 500px;
+	box-sizing: border-box;
+	/* Move background into the inner container so image stays inside */
+	background-image: url('assets/backgrounds/background-imagem-blog.webp');
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	display: flex;
+	position: relative;
+	align-items: center;
+	padding-left: 120px;
+	padding-right: 120px;
+}
+
+.home-action-inner-single::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45); /* overlay darkness; adjust opacity as needed */
+	z-index: 1;
+}
+
 .home-action-title {
 	position: relative;
 	z-index: 2;
@@ -784,9 +800,13 @@ body.front-page {
 	font-weight: 700;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
 	.home-action-inner {
-		padding: 48px 0;
+		padding: 0px 16px;
+	}
+
+	.home-action-inner-single {
+		padding: 0px 16px;
 	}
 
 	.home-action-title {
@@ -862,12 +882,17 @@ body.front-page {
 	padding-right: 120px;
 	box-sizing: border-box;
 	margin: 48px 0;
+	margin-top: -180px;
 }
 
 .home-posts-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 24px;
+}
+
+.home-posts-grid .post {
+	padding: 0px !important;
 }
 
 .home-post-card {
@@ -929,11 +954,12 @@ body.front-page {
 
 .card-excerpt {
 	color: #666666;
-	margin: 0 0 12px 0;
+	margin: 0 0 40px 0;
 }
 
 .card-read-more {
 	color: #01758D;
+	font-size: small;
 	font-weight: 700;
 	text-decoration: none;
 }
@@ -942,7 +968,6 @@ body.front-page {
 	.home-posts-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	.home-posts-wrap { padding-left: 32px; padding-right: 32px; }
 }
 
 @media (max-width: 768px) {
@@ -1087,6 +1112,11 @@ textarea {
 --------------------------------------------- */
 .sticky {
 	display: block;
+}
+
+.post {
+	padding-left: 120px;
+	padding-right: 120px;
 }
 
 .post,
@@ -1276,9 +1306,12 @@ textarea {
 }
 
 #primary {
-	margin-top: -200px;
 	position: relative;
 	z-index: 1000;
+}
+
+#page {
+	background-color: #F4F4F4;
 }
 
 /* Do not show the outline on the skip link target. */
@@ -1314,4 +1347,91 @@ textarea {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 1.5em;
+}
+
+/* Single post blog-sheet styles */
+.blog-hero {
+	background-size: cover;
+	background-position: center;
+	padding: 60px 0;
+}
+
+.blog-container {
+	display: flex;
+	margin-bottom: 40px;
+	margin-top: -180px;
+}
+
+.blog-sheet {
+	background: #ffffff;
+	width: 50%;
+	box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+	padding: 30px;
+	box-sizing: border-box;
+}
+.post-feature-img {
+	width: 100%;
+	height: auto;
+	display: block;
+	margin-bottom: 16px;
+}
+.post-flag {
+	background: #01758D;
+	color: #fff;
+	padding: 8px 16px;
+	border-radius: 50px;
+	font-weight: 600;
+	display: block;
+	width: fit-content;
+	margin-bottom: 12px;
+}
+.post-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	margin-bottom: 16px;
+	color: #939393;
+}
+.post-date {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+.post-date .icon-calendar {
+	color: #939393;
+}
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: #939393;
+}
+.post-tag .icon-tag {
+	color: #939393;
+}
+.post-title {
+	color: #525252;
+	font-size: 2rem;
+	margin-top: 12px;
+	margin-bottom: 0px;
+}
+.post-author {
+	color: #939393;
+	margin-bottom: 18px;
+}
+.post-excerpt {
+	color: #525252;
+	margin-bottom: 20px;
+}
+.post-content {
+	color: #525252;
+}
+
+@media (max-width: 1200px) {
+	.post { padding-left: 100px; padding-right: 100px; }
+	.blog-sheet { width: 100%; }
+}
+@media (max-width: 600px) {
+	.post { padding-left: 20px; padding-right: 20px; }
 }

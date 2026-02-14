@@ -10,6 +10,11 @@
 get_header();
 ?>
 
+<!-- Single post hero section (below header) -->
+<section class="home-action" aria-label="Hero do post">
+    <div class="home-action-inner-single"></div>
+</section>
+
 	<main id="primary" class="site-main">
 
 		<?php
@@ -25,16 +30,12 @@ get_header();
 				)
 			);
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+			// Comments removed per request.
 
 		endwhile; // End of the loop.
 		?>
 
 	</main><!-- #main -->
 
-<?php
-get_sidebar();
-get_footer();
+	<?php
+	get_footer();
