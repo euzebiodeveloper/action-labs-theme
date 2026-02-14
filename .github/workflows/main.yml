@@ -26,7 +26,7 @@ jobs:
           rm -rf build dist
           mkdir -p dist
           mkdir -p build/${{ env.THEME_NAME }}
-          rsync -av --exclude='.git' --exclude='node_modules' --exclude='dist' --exclude='build' . build/${{ env.THEME_NAME }}
+          rsync -av --exclude='.git' --exclude='node_modules' --exclude='dist' --exclude='build' --exclude="readme.md" --exclude=".*" . build/${{ env.THEME_NAME }}
           find ./build -type f -exec chmod 0644 {} +
           find ./build -type d -exec chmod 0755 {} +
 
